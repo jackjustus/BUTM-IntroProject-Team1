@@ -17,7 +17,7 @@ import time
 
 # ---------------CLIENT SETUP------------------
 laptopClient = net.TCPClient()
-laptopClient.set_server_address('127.0.0.1', 65432)
+# laptopClient.set_server_address('127.0.0.1', 65432)
 laptopClient.connect_to_server()
 
 
@@ -27,10 +27,6 @@ laptopClient.connect_to_server()
 
 while True:
 
-    # Get sensor data
-    sensor_one = laptopClient.send_request("sensor_one")
-    time.sleep(1)
+
+    time.sleep(0.1)
     ir = laptopClient.send_request("ir")
-    time.sleep(3)
-    bad = laptopClient.send_request("request 2")
-    time.sleep(1)
