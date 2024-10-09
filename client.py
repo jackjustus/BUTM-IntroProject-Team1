@@ -24,6 +24,11 @@ laptopClient.connect_to_server()
 
 
 # TODO: Launch UI
+from resources.ui_manager import start_ui
+
+if __name__ == "__main__":
+    start_ui()
+
 
 while True:
 
