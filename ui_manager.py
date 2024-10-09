@@ -3,7 +3,7 @@
 
 # Written by Thomas Shin
 
-# This is the file to ui manager code that will be called into client.py
+# This is the ui manager file that will be called into client.py
 
 
 # ui_manager.py
