@@ -8,8 +8,6 @@
 
 # ui_manager.py
 
-# ui_manager.py
-
 from kivy.app import App
 from kivy.uix.label import Label
 from kivy.clock import Clock
