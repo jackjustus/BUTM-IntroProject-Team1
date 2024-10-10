@@ -15,12 +15,14 @@ import resources.netcode as net
 
 # The main application class for the UI to display sensor data
 class SensorUI(App):
+    client = None
     def __init__(self, **kwargs):
         # Initialize Kivy App and TCP client settings
         super().__init__(**kwargs)
-        self.client = net.TCPClient()  # Create a new TCPClient instance
-        self.client.set_server_address("192.168.1.2", 65432)  # Set server IP (Raspberry Pi's IP) and port
-        self.client.connect_to_server()  # Establish a connection to the server
+
+        # self.client = net.TCPClient()  # Create a new TCPClient instance
+        # self.client.set_server_address("192.168.1.2", 65432)  # Set server IP (Raspberry Pi's IP) and port
+        # self.client.connect_to_server()  # Establish a connection to the server
         self.label = Label(text="Connecting to server...")  # Display initial connection status
 
     def build(self):
@@ -43,6 +45,12 @@ class SensorUI(App):
             # Display error message if request fails
             self.label.text = f"Error: {e}"
 
+    def set_client(self, client):
+        self.client = client
+
 # Function to start the Kivy UI application
-def start_ui():
-    SensorUI().run()
+def start_ui(client):
+    ui = SensorUI()
+    ui.set_client(client)
+    ui.run()
+    
