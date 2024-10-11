@@ -11,6 +11,7 @@
 # Server IP: 192.168.1.2/24
 
 import resources.netcode as net
+import resources.sensor as ultrasonic_sensor
 import random
 
 
@@ -20,6 +21,9 @@ import random
 # ---------------SENSOR GET FUNCTIONS------------------
 def get_temperature():
     return random.randint(50,80)
+
+def get_ultrasonic():
+    return ultrasonic_sensor.get_distance()
 
 def sensor_one():
     return 0
@@ -35,6 +39,7 @@ def sensor_two():
 # Robust way of keeping track of responses
 response_table = {
     'ir': get_temperature,
+    'ultrasonic': get_ultrasonic,
     'sensor_one': sensor_one,
     'sensor_two': sensor_two,
 }
