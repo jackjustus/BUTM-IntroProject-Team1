@@ -5,8 +5,9 @@ pulse_width = 100000000
 g.setmode(g.BCM)
 g.setwarnings(False)
 
-trigger_pin = 2
-reader_pin = 3
+trigger_pin = 2     # Corresponds to pin 3
+reader_pin = 3      # Corresponds to pin 5
+
 g.setup(trigger_pin, g.OUT)
 g.setup(reader_pin, g.IN)
 
