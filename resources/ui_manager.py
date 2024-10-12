@@ -10,47 +10,53 @@
 
 from kivy.app import App
 from kivy.uix.label import Label
+from kivy.uix.boxlayout import BoxLayout
 from kivy.clock import Clock
-import resources.netcode as net
+import resources.netcode as net  # Import the homemade netcode package for TCP communication
 
-# The main application class for the UI to display sensor data
+# Main application class for Kivy UI that displays sensor data
 class SensorUI(App):
-    client = None
     def __init__(self, **kwargs):
         # Initialize Kivy App and TCP client settings
         super().__init__(**kwargs)
+        self.client = net.TCPClient()  # Create new TCPClient instance
+        self.client.set_server_address("192.168.1.2", 65432)  # Set server IP (Raspberry Pi's IP) and port
+        self.client.connect_to_server()  # Establish connection to the TCP server
 
-        # self.client = net.TCPClient()  # Create a new TCPClient instance
-        # self.client.set_server_address("192.168.1.2", 65432)  # Set server IP (Raspberry Pi's IP) and port
-        # self.client.connect_to_server()  # Establish a connection to the server
-        self.label = Label(text="Connecting to server...")  # Display initial connection status
+        # Initialize Labels to display data from both sensors
+        self.ir_label = Label(text="IR Sensor: Connecting...")  # Label for IR sensor data
+        self.ultrasonic_label = Label(text="Ultrasonic Sensor: Connecting...")  # Label for ultrasonic sensor data
 
     def build(self):
-        # Sets up the Kivy UI layout and schedules periodic data requests
-        # Schedule the update_sensor_data method to run every second
-        Clock.schedule_interval(self.update_sensor_data, 1)  # Interval: 1 second
-        return self.label  # Return the label to display on the screen
+        # Set up layout and add both sensor labels to the UI
+        layout = BoxLayout(orientation='vertical')  # Create vertical box layout
+        layout.add_widget(self.ir_label)  # Add IR sensor label to the layout
+        layout.add_widget(self.ultrasonic_label)  # Add ultrasonic sensor label to the layout
+
+        # Schedule updates for both sensors every second
+        Clock.schedule_interval(self.update_sensor_data, 1)  # Set update interval to 1 second
+        return layout  # Return layout containing the labels
 
     def update_sensor_data(self, dt):
         """
-        Periodically called by Kivy's Clock to request IR sensor data from the server.
-        Updates the UI label with the sensor data or displays an error if it fails.
+        Periodically called to request data from both sensors and update the labels.
+        This method runs every second, as scheduled in the build method.
         """
         try:
-            # Send a request to the server for IR sensor data
+            # Request IR sensor data from server
             ir_data = self.client.send_request("ir")
-            # Update the label with the received sensor data
-            self.label.text = f"IR Sensor Data: {ir_data}"
+            # Update the IR sensor label with received data
+            self.ir_label.text = f"IR Sensor Data: {ir_data}"
+
+            # Request ultrasonic sensor data from server
+            ultrasonic_data = self.client.send_request("ultrasonic")
+            # Update the ultrasonic sensor label with received data
+            self.ultrasonic_label.text = f"Ultrasonic Sensor Data: {ultrasonic_data}"
         except Exception as e:
-            # Display error message if request fails
-            self.label.text = f"Error: {e}"
+            # If there is an error in requesting data, update labels to show the error
+            self.ir_label.text = f"IR Sensor Error: {e}"  # Display error for IR sensor
+            self.ultrasonic_label.text = f"Ultrasonic Sensor Error: {e}"  # Display error for ultrasonic sensor
 
-    def set_client(self, client):
-        self.client = client
-
-# Function to start the Kivy UI application
-def start_ui(client):
-    ui = SensorUI()
-    ui.set_client(client)
-    ui.run()
-    
+# Function to start Kivy UI application
+def start_ui():
+    SensorUI().run()  # Run SensorUI application
