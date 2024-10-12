@@ -11,6 +11,8 @@
 from kivy.app import App
 from kivy.uix.label import Label
 from kivy.clock import Clock
+from client import get_IR_sensor
+from client import get_Ultrasonic_sensor
 import resources.netcode as net
 
 # The main application class for the UI to display sensor data
@@ -20,9 +22,6 @@ class SensorUI(App):
         # Initialize Kivy App and TCP client settings
         super().__init__(**kwargs)
 
-        # self.client = net.TCPClient()  # Create a new TCPClient instance
-        # self.client.set_server_address("192.168.1.2", 65432)  # Set server IP (Raspberry Pi's IP) and port
-        # self.client.connect_to_server()  # Establish a connection to the server
         self.label = Label(text="Connecting to server...")  # Display initial connection status
 
     def build(self):
@@ -38,7 +37,8 @@ class SensorUI(App):
         """
         try:
             # Send a request to the server for IR sensor data
-            ir_data = self.client.send_request("ir")
+            ir_data = get_IR_sensor()
+            us_data = get_Ultrasonic_sensor()
             # Update the label with the received sensor data
             self.label.text = f"IR Sensor Data: {ir_data}"
         except Exception as e:
