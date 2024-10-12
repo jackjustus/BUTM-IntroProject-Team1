@@ -1,13 +1,12 @@
 
 from time import time_ns, sleep, time
 import RPi._GPIO as g
+import constants
 trigger_pulse = 10000
 pulse_width = 100000000
 g.setmode(g.BCM)
 g.setwarnings(False)
 
-trigger_pin = 2
-reader_pin = 3
 
 
 class sensor_data_collector:
@@ -50,7 +49,7 @@ class sensor_data_collector:
                 print("ERROR HAS OCCURED WITH IR SENSOR IN [is_close()]")
                 return None
 stime = time()
-sensor = sensor_data_collector(trigger_pin, reader_pin,26)
+sensor = sensor_data_collector(constants.trigger_pin, constants.us_read_pin, constants.ir_read_pin)
 while time()-stime <10:
     print(sensor.get_distance())
     print(sensor.is_close())

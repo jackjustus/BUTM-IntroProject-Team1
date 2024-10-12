@@ -13,6 +13,7 @@
 import resources.netcode as net
 import resources.sensor as ultrasonic_sensor
 import random
+import constants
 
 
 # ---------------SENSOR GET FUNCTIONS------------------
@@ -49,7 +50,7 @@ response_table = {
 # ---------------SERVER SETUP------------------
 # Start the server
 piServer = net.TCPServer()
-piServer.set_server_address('127.0.0.1', 65432)
+piServer.set_server_address(constants.pi_IP_ADDRESS, 65432)
 piServer.start_server()
 
 def run_server():

@@ -13,12 +13,12 @@
 import resources.netcode as net
 from resources.ui_manager import SensorUI
 import time
-
+import constants
 
 
 # ---------------CLIENT SETUP------------------
 laptopClient = net.TCPClient()
-laptopClient.set_server_address('127.0.0.1', 65432)
+laptopClient.set_server_address(constants.pi_IP_ADDRESS, 65432)
 laptopClient.connect_to_server()
 
 
