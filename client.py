@@ -21,10 +21,7 @@ laptopClient = net.TCPClient()
 laptopClient.set_server_address('127.0.0.1', 65432)
 laptopClient.connect_to_server()
 
-def get_IR_sensor():
-    return laptopClient.send_request("ir")
-def get_Ultrasonic_sensor():
-    return laptopClient.send_request("ultrasonic")
+
 
 
 # ---------------UI SETUP------------------
