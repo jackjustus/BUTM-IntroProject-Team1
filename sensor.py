@@ -49,7 +49,7 @@ class sensor_data_collector:
                 print("ERROR HAS OCCURED WITH IR SENSOR IN [is_close()]")
                 return None
 stime = time()
-sensor = sensor_data_collector(constants.trigger_pin, constants.us_read_pin, constants.ir_read_pin)
+sensor = sensor_data_collector(constants.trigger_pin, constants.ultrasonic_read_pin, constants.ir_read_pin)
 while time()-stime <10:
     print(sensor.get_distance())
     print(sensor.is_close())
