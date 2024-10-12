@@ -15,9 +15,6 @@ import resources.sensor as ultrasonic_sensor
 import random
 
 
-
-
-
 # ---------------SENSOR GET FUNCTIONS------------------
 def get_temperature():
     return random.randint(50,80)
