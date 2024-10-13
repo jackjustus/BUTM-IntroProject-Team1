@@ -8,8 +8,7 @@
 # The client will read the response and pass it off to the UI Controller
 # Static IPs must be set up on both devices for this to work.
 
-# Server IP: 192.168.1.2/24:65432
-# Client IP: 192.168.1.3/24
+
 
 
 
@@ -19,8 +18,8 @@ class TCPClient:
     # This class enables a TCP Network connection with a TCP Server
 
     connection = None               # Socket object
-    server_ip = '192.168.1.2'
-    server_port = 65432
+    server_ip = constants.pi_IP_ADDRESS
+    server_port = constants.router_to_PI_PORT
 
     connection_active = False
 
