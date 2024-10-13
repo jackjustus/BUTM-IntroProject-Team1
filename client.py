@@ -18,7 +18,7 @@ import constants
 
 # ---------------CLIENT SETUP------------------
 laptopClient = net.TCPClient()
-laptopClient.set_server_address(constants.pi_IP_ADDRESS, 65432)
+laptopClient.set_server_address(constants.router_IP_ADRESS, constants.router_to_PI_PORT)
 laptopClient.connect_to_server()
 
 

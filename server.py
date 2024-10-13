@@ -11,10 +11,11 @@
 # Server IP: 192.168.1.2/24
 
 import resources.netcode as net
-import resources.sensor as ultrasonic_sensor
+import resources.sensor as sensor
 import random
 import constants
 
+ultrasonic_sensor = sensor.sensor_data_collector(constants.trigger_pin,constants.ultrasonic_read_pin, constants.ir_read_pin)
 
 # ---------------SENSOR GET FUNCTIONS------------------
 def get_temperature():
@@ -50,7 +51,7 @@ response_table = {
 # ---------------SERVER SETUP------------------
 # Start the server
 piServer = net.TCPServer()
-piServer.set_server_address(constants.pi_IP_ADDRESS, 65432)
+piServer.set_server_address(constants.pi_IP_ADDRESS, constants.pi_to_router_port)
 piServer.start_server()
 
 def run_server():
