@@ -51,7 +51,7 @@ response_table = {
 # ---------------SERVER SETUP------------------
 # Start the server
 piServer = net.TCPServer()
-piServer.set_server_address(constants.pi_IP_ADDRESS, constants.pi_to_router_port)
+piServer.set_server_address(constants.pi_IP_ADDRESS, constants.router_to_PI_PORT)
 piServer.start_server()
 
 def run_server():
