@@ -13,7 +13,7 @@
 
 
 import socket
-
+import constants
 class TCPClient:
     # This class enables a TCP Network connection with a TCP Server
 
