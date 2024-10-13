@@ -140,8 +140,9 @@ class TCPServer:
         # Encode strings before sending them
         if isinstance(response, str):
             response = response.encode()
-        elif isinstance(response, int):
-            response = f"{response}".encode()
+        elif isinstance(response, float):
+            response = str(response).encode()
+            print(f"this is an int: {response}")
         
         # Send the strings
         print(f"Sent: {response}")
