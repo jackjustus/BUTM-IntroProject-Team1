@@ -69,4 +69,5 @@ class sensor_data_collector:
         with open(f'data_{name}.csv', 'w', newline= '') as c:
             writer = csv.writer(c)
             writer.writerow(za_data)
+        print(za_data)
         return za_data
