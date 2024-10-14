@@ -1,5 +1,6 @@
 
 from time import time_ns, sleep, time
+import time
 import RPi._GPIO as g
 import csv
 import constants
@@ -64,8 +65,7 @@ class sensor_data_collector:
     
     def collect_data(self):
         za_data = self.get_data_timestamped()
-        with open("data.csv", 'w',) as c:
+        with open(f'data from {time.timeasctime(time.localtime(self.current_time))}', 'w',) as c:
             writer = csv.writer(c)
-            
             writer.writerow(za_data)
         return za_data
