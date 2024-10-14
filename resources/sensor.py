@@ -11,11 +11,12 @@ g.setwarnings(False)
 
 
 class sensor_data_collector:
-    def __init__(self, trigger_pin: int, ultrasonic_read_pin:int, ir_read_pin:int):
+    def __init__(self, trigger_pin: int, ultrasonic_read_pin:int, ir_read_pin:int, current_time):
         self.trigger_pin = trigger_pin
         self.us_read_pin = ultrasonic_read_pin
         self.ir_read_pin = ir_read_pin
         self.start_time = time()
+        self.current_time = current_time
         g.setup(self.trigger_pin, g.OUT)
         g.setup(self.us_read_pin, g.IN)
         g.setup(self.ir_read_pin, g.IN)
@@ -67,9 +68,3 @@ class sensor_data_collector:
             za_data = self.get_data_timestamped()
             writer.writerow(za_data)
             return za_data
-stime = time()
-sensor = sensor_data_collector(constants.trigger_pin, constants.ultrasonic_read_pin, constants.ir_read_pin)
-while time()-stime <10:
-    print(sensor.get_distance())
-    print(sensor.is_close())
-    sleep(0.2)

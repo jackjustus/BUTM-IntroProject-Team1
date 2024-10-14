@@ -12,10 +12,11 @@
 
 import resources.netcode as net
 import resources.sensor as sensor
+import time
 import random
 import constants
 
-ultrasonic_sensor = sensor.sensor_data_collector(constants.trigger_pin,constants.ultrasonic_read_pin, constants.ir_read_pin)
+ultrasonic_sensor = sensor.sensor_data_collector(constants.trigger_pin,constants.ultrasonic_read_pin, constants.ir_read_pi, time.time())
 
 # ---------------SENSOR GET FUNCTIONS------------------
 def get_temperature():
