@@ -1,6 +1,7 @@
 
 from time import time_ns, sleep, time
 import RPi._GPIO as g
+import csv
 import constants
 trigger_pulse = 10000
 pulse_width = 100000000
@@ -14,10 +15,13 @@ class sensor_data_collector:
         self.trigger_pin = trigger_pin
         self.us_read_pin = ultrasonic_read_pin
         self.ir_read_pin = ir_read_pin
+        self.start_time = time()
         g.setup(self.trigger_pin, g.OUT)
         g.setup(self.us_read_pin, g.IN)
         g.setup(self.ir_read_pin, g.IN)
 
+    def reset_start_time(self):
+        self.start_time = time()
     def get_distance(self):
         g.output(self.trigger_pin,g.HIGH)
         start_time = time_ns()
@@ -48,6 +52,21 @@ class sensor_data_collector:
             case _:
                 print("ERROR HAS OCCURED WITH IR SENSOR IN [is_close()]")
                 return None
+    def get_distance_timestamped(self):
+        return (self.get_distance(),time()-self.start_time)
+    
+    def is_close_timestamped(self):
+        return (self.is_close(),time()-self.start_time)
+    
+    def get_data_timestamped(self):
+        return (self.get_distance(),self.is_close(), time-self.start_time)
+    
+    def collect_data(self):
+        with open("data.csv", 'w',) as c:
+            writer = csv.writer(c)
+            za_data = self.get_data_timestamped()
+            writer.writerow(za_data)
+            return za_data
 stime = time()
 sensor = sensor_data_collector(constants.trigger_pin, constants.ultrasonic_read_pin, constants.ir_read_pin)
 while time()-stime <10:
