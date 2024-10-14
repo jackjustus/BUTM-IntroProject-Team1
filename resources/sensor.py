@@ -63,8 +63,9 @@ class sensor_data_collector:
         return (self.get_distance(),self.is_close(), time-self.start_time)
     
     def collect_data(self):
+        za_data = self.get_data_timestamped()
         with open("data.csv", 'w',) as c:
             writer = csv.writer(c)
-            za_data = self.get_data_timestamped()
+            
             writer.writerow(za_data)
             return za_data
