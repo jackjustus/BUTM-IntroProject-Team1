@@ -68,4 +68,4 @@ class sensor_data_collector:
             writer = csv.writer(c)
             
             writer.writerow(za_data)
-            return za_data
+        return za_data
