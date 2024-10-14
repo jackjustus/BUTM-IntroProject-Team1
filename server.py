@@ -22,10 +22,10 @@ def get_temperature():
     return random.randint(50,80)
 
 def get_ultrasonic():
-    return ultrasonic_sensor.get_distance()
+    return ultrasonic_sensor.collect_data()[0]
 
 def get_ir():
-    return ultrasonic_sensor.is_close()
+    return ultrasonic_sensor.collect_data()[1]
 
 def sensor_two():
     return 1
