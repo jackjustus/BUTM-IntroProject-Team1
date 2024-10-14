@@ -24,8 +24,8 @@ def get_temperature():
 def get_ultrasonic():
     return ultrasonic_sensor.get_distance()
 
-def sensor_one():
-    return 0
+def get_ir():
+    return ultrasonic_sensor.is_close()
 
 def sensor_two():
     return 1
@@ -37,10 +37,8 @@ def sensor_two():
 # ---------------RESPONSE TABLE------------------
 # Robust way of keeping track of responses
 response_table = {
-    'ir': get_temperature,
+    'ir': get_ir,
     'ultrasonic': get_ultrasonic,
-    'sensor_one': sensor_one,
-    'sensor_two': sensor_two,
 }
 
 
