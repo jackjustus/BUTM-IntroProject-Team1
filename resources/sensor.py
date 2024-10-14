@@ -64,6 +64,17 @@ class sensor_data_collector:
     
     def collect_data(self):
         za_data = self.get_data_timestamped()
+
+        name = asctime(localtime(self.current_time)).replace(' ', '_').replace(':', '-')
+
+        with open(f'data_{name}.csv', 'w', newline='') as c:
+            writer = csv.writer(c)
+            writer.writerow(za_data)  
+
+        print(za_data)
+        return za_data
+        '''
+        za_data = self.get_data_timestamped()
         name = asctime(localtime(self.current_time)).replace(' ', '_')
         name = name.replace(':', '-')
         with open(f'data_{name}.csv', 'w', newline= '') as c:
@@ -73,3 +84,4 @@ class sensor_data_collector:
            c.write('\n')
         print(za_data)
         return za_data
+'''
