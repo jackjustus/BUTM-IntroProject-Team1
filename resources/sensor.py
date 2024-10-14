@@ -67,7 +67,7 @@ class sensor_data_collector:
 
         name = asctime(localtime(self.current_time)).replace(' ', '_').replace(':', '-')
 
-        with open(f'data_{name}.csv', 'a', newline='') as c:
+        with open(f'data_log/data_{name}.csv', 'a', newline='') as c:
             writer = csv.writer(c)
             writer.writerow(za_data)  
 
