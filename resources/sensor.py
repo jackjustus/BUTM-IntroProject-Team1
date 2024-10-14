@@ -64,7 +64,8 @@ class sensor_data_collector:
     
     def collect_data(self):
         za_data = self.get_data_timestamped()
-        with open(f'data_from_{asctime(localtime(self.current_time))}.csv', 'w',) as c:
+        name = asctime(localtime(self.current_time).replace(' ', '_')
+        with open(f'data_{name.replace(':', '-')}.csv', 'w',) as c:
             writer = csv.writer(c)
             writer.writerow(za_data)
         return za_data
