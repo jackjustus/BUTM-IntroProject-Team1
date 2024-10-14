@@ -40,8 +40,8 @@ def sensor_two():
 # ---------------RESPONSE TABLE------------------
 # Robust way of keeping track of responses
 response_table = {
-    'ir': get_ir,
-    'ultrasonic': get_ultrasonic,
+    'ir': get_ir(),
+    'ultrasonic': get_ultrasonic(),
 }
 
 
