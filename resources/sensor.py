@@ -60,7 +60,7 @@ class sensor_data_collector:
         return (self.is_close(),time()-self.start_time)
     
     def get_data_timestamped(self):
-        return (self.get_distance(),self.is_close(), time-self.start_time)
+        return (self.get_distance(),self.is_close(), time()-self.start_time)
     
     def collect_data(self):
         za_data = self.get_data_timestamped()
