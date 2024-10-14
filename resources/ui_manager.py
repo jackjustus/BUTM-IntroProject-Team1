@@ -34,7 +34,7 @@ class SensorUI(App):
         layout.add_widget(self.ultrasonic_label)  # Add ultrasonic sensor label to the layout
 
         # Schedule updates for both sensors every second
-        Clock.schedule_interval(self.update_sensor_data, 1)  # Set update interval to 1 second
+        Clock.schedule_interval(self.update_sensor_data, 0.2)  # Set update interval to 1 second
         return layout  # Return layout containing the labels
 
     def update_sensor_data(self, dt):
