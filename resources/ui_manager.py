@@ -61,7 +61,7 @@ class SensorUI(App):
             self.ir_label.text = f"IR Sensor Error: {e}"  # Display error for IR sensor
             self.us_label.text = f"Ultrasonic Sensor Error: {e}"  # Display error for ultrasonic sensor
 
-    def set_client(self, client):
+    def set_client(self, client): # send requests to server through laptopClient and return the results
         self.laptopClient = client
         
     def get_IR_sensor(self):
